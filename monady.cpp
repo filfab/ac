@@ -46,12 +46,27 @@ auto square() {
     };
 }
 
+auto fafafaf() {
+    return [](int x) -> WriterInt {
+        int res;
+        std::string entry;
+        if (x%2==0) {
+            res = x/2;
+            entry = " -> (" + std::to_string(x) + "/2 = " + std::to_string(res) + ")"; 
+        } else {
+            res = 3*x+1;
+            entry = " -> (3*" + std::to_string(x) + "+1 = " + std::to_string(res) + ")"; 
+        }
+        
+        return {res, entry};
+    };
+}
+
+
 int main() {
-    WriterInt start = {5, "5"};
+    WriterInt start = unit(5);
     
-    WriterInt result = start | add(2)
-                             | multiply(3)
-                             | square();
+    WriterInt result = start | fafafaf() | fafafaf();
     
     std::cout << "wynik " << result.value << std::endl;
     std::cout << "slad " << result.log << std::endl;
